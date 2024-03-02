@@ -1,0 +1,47 @@
+.mainContainer{
+    border: 2px solid black;
+    margin: 2%;
+}
+.demo-table {
+    width: 100%;
+  }
+  
+  .demo-button-container {
+    padding-bottom: 16px;
+  }
+  
+  .demo-button + .demo-button {
+    margin-left: 8px;
+  }
+
+  .button{
+    float:right;
+    margin: 2%;
+  }
+
+  .table{
+    margin: 5%;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .text{
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+  }
+  .align{
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+
+  th{
+    background-color: #dcdcdc !important;
+  }
+  td{
+    border: 1px solid #000000 !important;
+  }

@@ -1,0 +1,161 @@
+<div class="mainContainer1">
+    <div class="header">
+        <mat-toolbar>
+            <span class="example-spacer"></span>
+            <span class="text">Registration Form</span>
+            <span class="example-spacer"></span>
+        </mat-toolbar>
+    </div>
+    <button mat-raised-button color="primary" (click)="addData()" class="demo-button button1">
+        Add Student
+    </button>
+    <form [formGroup]="profileForm">
+        <div class="mainContainer" formArrayName="newArray">
+            <ng-container *ngFor="let creds of newArray.controls; let i = index">
+                <div class="containerLeft" [formGroupName]="i">
+                    <div class="innerContainer">
+                        <h1>Student Details</h1>
+                        <div class="nameContainer">
+                            <mat-form-field class="inputBoxWidth">
+                                <mat-label>First Name </mat-label>
+                                <input matInput="nameValue" formControlName="firstName">
+                                <mat-error class="error" *ngIf="creds.get('firstName')?.hasError('required')">
+                                    This field is required..!
+                                </mat-error>
+                                <mat-error class="error" *ngIf="creds.get('firstName')?.hasError('pattern')">
+                                    Enter Letters only..!
+                                </mat-error>
+                                <mat-error class="error" *ngIf="creds.get('firstName')?.hasError('maxlength')">
+                                    Enter only 50 Letters..!
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="inputBoxWidth">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput="nameValue" formControlName="lastName">
+                                <mat-error class="error" *ngIf="creds.get('lastName')?.hasError('required')">
+                                    This field is required..!
+                                </mat-error>
+                                <mat-error class="error" *ngIf="creds.get('lastName')?.hasError('pattern')">
+                                    Enter Letters only..!
+                                </mat-error>
+                                <mat-error class="error" *ngIf="creds.get('lastName')?.hasError('maxlength')">
+                                    Enter only 50 Letters..!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <mat-form-field class="inputBoxWidth ">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dob">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error class="error" *ngIf="creds.get('dob')?.hasError('required')">
+                                This field is required..!
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="inputBoxWidth ">
+                            <mat-label>Enter your email</mat-label>
+                            <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                            <mat-error class="error" *ngIf="creds.get('email')?.hasError('required')">
+                                This field is required..!
+                            </mat-error>
+                            <mat-error class="error" *ngIf="creds.get('email')?.hasError('pattern')">
+                                Enter the valid email ID..!
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="inputBoxWidth ">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput formControlName="mobile" placeholder="Ex. 9876543210">
+                            <mat-error class="error" *ngIf="creds.get('mobile')?.hasError('required')">
+                                This field is required..!
+                            </mat-error>
+
+                            <mat-error class="error" *ngIf="creds.get('mobile')?.hasError('pattern')">
+                                Enter 10 digit Mobile Number..!
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="inputBoxWidth">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput formControlName="address"></textarea>
+
+                            <mat-error class="error" *ngIf="creds.get('address')?.hasError('required')">
+                                This field is required..!
+                            </mat-error>
+                            <mat-error class="error" *ngIf="creds.get('address')?.hasError('maxlength')">
+                                Enter only 100 Characters..!
+                            </mat-error>
+                            <mat-error class="error" *ngIf="creds.get('address')?.hasError('pattern')">
+                                Special Characters are restricted..!
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="inputBoxWidth">
+                            <mat-label>Pin Code</mat-label>
+                            <input matInput #postalCode maxlength="6" placeholder="Ex. 641668" formControlName="pin">
+                            <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+                            <mat-error class="error" *ngIf="creds.get('pin')?.hasError('required')">
+                                This field is required..!
+                            </mat-error>
+
+                            <mat-error class="error" *ngIf="creds.get('pin')?.hasError('pattern')">
+                                Enter 6 digit pin number..!
+                            </mat-error>
+                        </mat-form-field>
+
+                        <div class="example-section inputBoxWidth form-group" formGroupName="myCheckboxGroup">
+                            <div class=" ">Skills <span class="highlight"></span></div>
+                            <span class="custom-control custom-checkbox ">
+                                <input type="checkbox" class="example-margin custom-control-input"
+                                    formControlName="myCheckbox1" id="myCheckbox1">
+                                <label class="example-margin custom-control-label">Hardwork</label>
+                            </span>
+                            <span class="custom-control custom-checkbox inputBoxWidth">
+                                <input type="checkbox" class="example-margin custom-control-input"
+                                    formControlName="myCheckbox2" id="myCheckbox2">
+                                <label class="custom-control-label">Communication</label>
+                            </span>
+                            <span class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" formControlName="myCheckbox3"
+                                    id="myCheckbox3">
+                                <label class="custom-control-label">Confidence</label>
+                            </span>
+
+                            <mat-error class="error " *ngIf="creds.get('myCheckboxGroup')?.errors &&
+                                creds.get('myCheckboxGroup')?.dirty &&
+                                creds.get('myCheckboxGroup')?.hasError('requireOneCheckboxToBeChecked')">
+                                This field is required..!</mat-error>
+                        </div>
+
+                        <mat-form-field class="inputBoxWidth">
+                            <mat-label>Courses</mat-label>
+                            <mat-select formControlName="courses">
+                                <mat-option value="Data Science">Data Science</mat-option>
+                                <mat-option value="Data Analyst">Data Analyst</mat-option>
+                                <mat-option value="Java Development">Java Development</mat-option>
+                                <mat-option value="React js Development">React Development</mat-option>
+                                <mat-option value="Angular Development">Angular Development</mat-option>
+                                <mat-option value="Back end Development">Back end Development</mat-option>
+                                <mat-option value="Vue js Development">Vue Development</mat-option>
+                                <mat-option value="Python Development">Python Development</mat-option>
+                                <mat-option value="Dot net Development">Dot net Development</mat-option>
+                                <mat-option value="Automation Testing">Automation Testing</mat-option>
+                            </mat-select>
+                            <mat-error class="error" *ngIf=" creds.get('courses')?.hasError('required')">
+                                This field is required..!
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </form>
+    <div class="button2">
+        <button mat-raised-button [disabled]="profileForm.invalid" color="primary" (click)="submit()"
+            class="demo-button btn">Submit</button>
+    </div>
+</div>
